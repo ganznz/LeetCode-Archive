@@ -1,4 +1,4 @@
-class MyCircularQueue {
+export class MyCircularQueue {
     constructor(k) {
         this.queue = [];
         this.length = k;

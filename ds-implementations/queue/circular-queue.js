@@ -1,4 +1,4 @@
-export class MyCircularQueue {
+export class CircularQueue {
     constructor(k) {
         this.queue = [];
         this.length = k;
@@ -42,4 +42,14 @@ export class MyCircularQueue {
     
         return true;
     }
+
+    // get size of queue (e.g. 2, if 2 items are currently in the queue)
+    size = () => {
+        if (this.isEmpty()) return 0;
+
+        return this.tailI >= this.headI
+            ? this.tailI - this.headI + 1
+            : this.length - (this.headI - this.tailI - 1);
+    }
+    
 }

@@ -1,6 +1,6 @@
 /*
 
-possible non-iterative algo
+possible non-recursive algo
 
 - loop through every char of string
 - if number: while s[i] not number do numTemp += tostring(s[i])

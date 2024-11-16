@@ -12,8 +12,7 @@ const nextGreater = arr => {
     const stack = []
     const result = Array.from(arr, x => x = -1);
     for (let i = 0; i < arr.length; i++) {
-        // while loop runs till stack is empty &&
-        // element at top of stack is strictly smaller than current element
+        // while element at top of stack is strictly smaller than current element
         while (stack.length !== 0 && arr[stack[stack.length-1]] < arr[i]) {
             const currIndex = stack.pop();
             result[currIndex] = i;
@@ -40,8 +39,7 @@ const nextSmaller = arr => {
     const stack = []
     const result = Array.from(arr, x => x = -1);
     for (let i = 0; i < arr.length; i++) {
-        // while loop runs till stack is empty &&
-        // element at top of stack is strictly larger than current element
+        // while element at top of stack is strictly larger than current element
         while (stack.length !== 0 && arr[stack[stack.length-1]] > arr[i]) {
             const currIndex = stack.pop();
             result[currIndex] = i;

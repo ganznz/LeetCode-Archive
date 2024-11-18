@@ -31,7 +31,7 @@ const preorderTraversal = root => {
 
 /* recursive implementation */
 const preorderTraversalRecursive = (root, result = []) => {
-    if (!root) return result;
+    if (!root) return;
 
     result.push(root.val);
     if (root.left) preorderTraversalRecursive(root.left, result);

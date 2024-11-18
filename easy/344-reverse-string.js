@@ -4,8 +4,23 @@ const reverseString = strArr => {
         strArr[strArr.length-1-i] = strArr[i];
         strArr[i] = temp;
     }
-    return strArr;
+    console.log(strArr);
 }
+
+/* recursive implementation */
+const reverseStringRecursive = (strArr, currI = 0) => {
+    if (currI >= strArr.length-(1+currI)) {
+        return strArr;
+    }
+    const temp = strArr[strArr.length-(1+currI)];
+    strArr[strArr.length-(1+currI)] = strArr[currI];
+    strArr[currI] = temp;
+    
+    return reverseStringRecursive(strArr, currI+1);
+}
+
 
 reverseString(["h","e","l","l","o"]);
 reverseString(["H","a","n","n","a","h"]);
+console.log(reverseStringRecursive(["h","e","l","l","o"]));
+console.log(reverseStringRecursive(["H","a","n","n","a","h"]));

@@ -11,23 +11,18 @@ import { createLinkedList } from "../dsa-implementations/data-structures/linked-
  * @param {ListNode} head
  * @return {ListNode}
  */
-
 const swapPairs = head => {
     if (!head) return null;
     if (!head.next) return head;
+
+    const nodeToAttachTo = (head.next) ? swapPairs(head.next.next) : null;
     
-    const recurse = head => {
-        const nodeToAttachTo = (head.next && head.next.next) ? recurse(head.next.next) : null;
-        
-        // swap 'head' and 'node after head' around
-        const newHead = head.next;
-        head.next = nodeToAttachTo;
-        if (newHead) newHead.next = head;
+    // swap 'head' and 'node after head' around
+    const newHead = head.next;
+    head.next = nodeToAttachTo;
+    if (newHead) newHead.next = head;
 
-        return newHead || head;
-
-    }
-    return recurse(head);
+    return newHead || head;
 };
 
 console.log(swapPairs(createLinkedList([1,2,3])));

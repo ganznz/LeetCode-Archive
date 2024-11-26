@@ -10,6 +10,39 @@ const pascalsTriangleII = rowIndex => {
     return arr[rowIndex];
 }
 
-pascalsTriangleII(3);
-pascalsTriangleII(0);
-pascalsTriangleII(1);
+/* recursive implementation */
+const recursivePascalsTriangleII = rowIndexToReturn => {
+    const calcArrayValues = (prevRow, rowIndex, i, j) => {
+        if (j == rowIndex) {
+            return [];
+        }
+        const prevArr = calcArrayValues(prevRow, rowIndex, i+1, j+1);
+        prevArr.unshift(prevRow[i] + prevRow[j]);
+        return prevArr;
+    }
+
+    const recurse = (rowIndex, prevRow = []) => {
+        let currRow;
+        if (rowIndex == 0) {
+            currRow = [1];
+        } else if (rowIndex == 1) {
+            currRow = [1,1];
+        } else {
+            currRow = [1].concat(calcArrayValues(prevRow, rowIndex, 0, 1)).concat([1]);
+        }
+        return rowIndex == rowIndexToReturn ? currRow : recurse(rowIndex + 1, currRow);
+    }
+    return recurse(0);
+}
+
+// output: [1,3,3,1]
+console.log(pascalsTriangleII(3));
+console.log(recursivePascalsTriangleII(3));
+
+// output: [1]
+console.log(pascalsTriangleII(0));
+console.log(recursivePascalsTriangleII(0));
+
+// output: [1,1]
+console.log(pascalsTriangleII(1));
+console.log(recursivePascalsTriangleII(1));

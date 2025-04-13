@@ -25,7 +25,6 @@ console.log(movingAverage.next(3)); // return 4.66667 = (1 + 10 + 3) / 3
 console.log(movingAverage.next(5)); // return 6.0 = (10 + 3 + 5) / 3
 
 // circular queue implementation
-
 class MovingAverageCircularQueue {
     constructor(size) {
         this.size = size;
@@ -39,7 +38,8 @@ class MovingAverageCircularQueue {
 
         if (!this.queue.isFull()) return this.sum / this.queue.size();
 
-        this.sum -= this.queue.deQueue();
+        this.sum -= this.queue.Front();
+        this.queue.deQueue();
         return this.sum / this.size;
     }
 }

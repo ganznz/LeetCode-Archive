@@ -1,39 +1,25 @@
-// const twoSum = (arr, target) => {
-//     let ptr1 = 0, ptr2 = arr.length-1;
-//     let canBreak = false;
-//     for (let i = 0; i <= arr.length; i++) {
-//         ptr1 = i;
-//         for (let j = arr.length-1; j >= 0; j--) {
-//             ptr2 = j;
-//             if (arr[ptr1] + arr[ptr2] < target) break;
-//             if (arr[ptr1] + arr[ptr2] == target) {
-//                 canBreak = true;
-//                 break;
-//             }
-//         }
-//         if (canBreak) break;
-//     }
-
-//     return [ptr1 + 1, ptr2 + 1];
-// }
-
-/*
-    REDO WITH O(n) COMPLEXITY
-*/
-
-const twoSum = (arr, target) => {
-    let ptr1 = 0;
-    let ptr2 = arr.length-1;
-    let result;
-    while (ptr1 < ptr2) {
-        result = arr[ptr1] + arr[ptr2];
-        if (result !== target) {
-            result > target ? ptr2-- : ptr1++;
-            continue;
-        }
-        return [ptr1+1, ptr2+1];
+// two ptr approach
+const twoSum = (numbers, target) => {
+    let i = 0;
+    let j = numbers.length-1;
+    while (i < j && numbers[i] + numbers[j] !== target) {
+        numbers[i] + numbers[j] < target ? i++ : j--;
     }
+    return [i+1, j+1];
 }
 
-console.log(twoSum([2,7,11,15], 9));
-console.log(twoSum([2,3,4], 6));
+console.log(twoSum([2,3,4], 6)) // output: [ 1, 3 ]
+console.log(twoSum([-1,0], -1)) // output: [ 1, 2 ]
+
+// recursive implementation
+const twoSumRecursive = (numbers, target, i=0, j=numbers.length-1) => {
+    while (i < j && numbers[i] + numbers[j] !== target) {
+        return numbers[i] + numbers[j] < target
+            ? twoSumRecursive(numbers, target, i+1, j)
+            : twoSumRecursive(numbers, target, i, j-1)
+    }
+    return [i+1, j+1];
+}
+
+console.log(twoSumRecursive([2,3,4], 6)) // output: [ 1, 3 ]
+console.log(twoSumRecursive([-1,0], -1)) // output: [ 1, 2 ]

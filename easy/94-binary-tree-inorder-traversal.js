@@ -14,38 +14,15 @@ import { TreeNode } from "../dsa-implementations/data-structures/tree/treeNode.j
  */
 
 
-// non-recursive implementation
-const inorderTraversal = root => {
-    if (!root) return [];
-    
-    const visited = new Map();
-    const result = [];
-    const stack = [root];
+const inorderTraversal = (root, result = []) => {
+    if (!root) return result;
 
-    while (stack.length > 0) {
-        const root = stack[stack.length-1];
-        if (root.left && !visited.has(root.left)) {
-            stack.push(root.left);
-            visited.set(root.left, true)
-        } else {
-            const popped = stack.pop();
-            result.push(popped.val);
-            if (root.right) { stack.push(root.right); }
-        }
-    }
-
-    return result;
-};
-
-/* recursive implementation */
-const inOrderRecursive = (root, result = []) => {
-    if (!root) return [];
-
-    if (root.left) inOrderRecursive(root.left, result);
+    if (root.left) inorderTraversal(root.left, result);
     result.push(root.val);
-    if (root.right) inOrderRecursive(root.right, result);
-    
+    if (root.right) inorderTraversal(root.right, result);
+
     return result;
+
 }
 
 /*
@@ -62,7 +39,6 @@ let root = new TreeNode(1,
 );
 // output: [4, 2, 5, 1, 3]
 console.log(inorderTraversal(root));
-console.log(inOrderRecursive(root));
 
 // 2. skewed left-heavy binary tree
 root = new TreeNode(1, 
@@ -74,7 +50,6 @@ root = new TreeNode(1,
 );
 // output: [4, 3, 2, 1]
 console.log(inorderTraversal(root));
-console.log(inOrderRecursive(root));
 
 // 3. skewed right-heavy binary tree
 root = new TreeNode(1, 
@@ -89,7 +64,6 @@ root = new TreeNode(1,
 );
 // output: [1, 2, 3, 4]
 console.log(inorderTraversal(root));
-console.log(inOrderRecursive(root));
 
 // 4. random binary tree structure
 root = new TreeNode(1, 
@@ -103,4 +77,3 @@ root = new TreeNode(1,
 );
 // output: [2, 4, 1, 5, 3]
 console.log(inorderTraversal(root));
-console.log(inOrderRecursive(root));

@@ -14,40 +14,11 @@ import { TreeNode } from "../dsa-implementations/data-structures/tree/treeNode.j
  */
 
 
-// non-recursive implementation
-const postorderTraversal = root => {
-    if (!root) return [];
-
-    const result = []
-    const stack = [root];
-    const visited = new Map();
-
-    while (stack.length > 0) {
-        const root = stack[stack.length-1];
-        if ((root.left && !visited.has(root.left)) || (root.right && !visited.has(root.right))) {
-            if (root.right && !visited.has(root.right)) {
-                stack.push(root.right);
-                visited.set(root.right, true);
-            }
-            if (root.left && !visited.has(root.left)) {
-                stack.push(root.left);
-                visited.set(root.left, true);
-            }
-        } else {
-            const popped = stack.pop();
-            result.push(popped.val);
-        }
-    }
-
-    return result;
-};
-
-/* recursive implementation */
-const postorderTraversalRecursive = (root, result = []) => {
+const postorderTraversal = (root, result = []) => {
     if (!root) return result;
 
-    if (root.left) postorderTraversalRecursive(root.left, result);
-    if (root.right) postorderTraversalRecursive(root.right, result);
+    if (root.left) postorderTraversal(root.left, result);
+    if (root.right) postorderTraversal(root.right, result);
     result.push(root.val);
 
     return result;
@@ -67,7 +38,6 @@ let root = new TreeNode(1,
 );
 // output: [4, 5, 2, 3, 1]
 console.log(postorderTraversal(root));
-console.log(postorderTraversalRecursive(root));
 
 // 2. skewed left-heavy binary tree
 root = new TreeNode(1, 
@@ -79,7 +49,6 @@ root = new TreeNode(1,
 );
 // output: [4, 3, 2, 1]
 console.log(postorderTraversal(root));
-console.log(postorderTraversalRecursive(root));
 
 // 3. skewed right-heavy binary tree
 root = new TreeNode(1, 
@@ -94,7 +63,6 @@ root = new TreeNode(1,
 );
 // output: [4, 3, 2, 1]
 console.log(postorderTraversal(root));
-console.log(postorderTraversalRecursive(root));
 
 // 4. random binary tree structure
 root = new TreeNode(1, 
@@ -108,4 +76,3 @@ root = new TreeNode(1,
 );
 // output: [4, 2, 5, 3, 1]
 console.log(postorderTraversal(root));
-console.log(postorderTraversalRecursive(root));

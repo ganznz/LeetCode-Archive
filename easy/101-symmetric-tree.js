@@ -13,13 +13,13 @@ import { TreeNode } from "../dsa-implementations/data-structures/tree/treeNode.j
  * @return {number[]}
  */
 
-const isSymmetric = root => {
+const isSymmetric = (root) => {
     if (!root) return true;
 
     const recurse = (rootLeft, rootRight) => {
-        if (!rootLeft && !rootRight) return true; // if neither node exists, still symmetrical
-        if (!rootLeft || !rootRight) return false; // if only 1 node exists, not symmetrical
-        return rootLeft.val == rootRight.val && recurse(rootLeft.left, rootRight.right) && recurse(rootLeft.right, rootRight.left);
+        if (!rootLeft && !rootRight) return true;
+        if (!rootLeft || !rootRight) return false;
+        return (rootLeft.val == rootRight.val) && recurse(rootLeft.left, rootRight.right) && recurse(rootLeft.right, rootRight.left);
     }
     return recurse(root.left, root.right);
 }
@@ -36,7 +36,7 @@ let root = new TreeNode(1,
         new TreeNode(2)
     )
 );
-// output: true
+// output: false
 console.log(isSymmetric(root));
 
 // 1. symmetric tree

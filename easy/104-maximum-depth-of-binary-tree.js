@@ -13,27 +13,27 @@ import { TreeNode } from "../dsa-implementations/data-structures/tree/treeNode.j
  * @return {number[]}
  */
 
-
-/* top-down implementation */
+// top-down approach
 const maxDepthTopDown = root => {
-    let answer = 0;
-    if (!root) return answer; // if empty tree, return depth of 0
-
-    const recurse = (root, currDepth) => {
-        if (!root.left && !root.right) answer = Math.max(answer, currDepth);
-        if (root.left) recurse(root.left, currDepth+1);
-        if (root.right) recurse(root.right, currDepth+1);
-    }
-    recurse(root, answer);
+    if (!root) return 0;
     
-    return answer + 1;
+    let ans = 1;
+    const recurse = (root, depth) => {
+        if (!root.left && !root.right) ans = Math.max(ans, depth);
+        if (root.left) recurse(root.left, depth+1);
+        if (root.right) recurse(root.right, depth+1);
+    }
+    recurse(root, ans);
+    return ans;
 }
 
-/* bottom-up implementation */
+// bottom-up approach
 const maxDepthBottomUp = root => {
     if (!root) return 0;
+
     const leftDepth = maxDepthBottomUp(root.left);
     const rightDepth = maxDepthBottomUp(root.right);
+
     return Math.max(leftDepth, rightDepth) + 1;
 }
 

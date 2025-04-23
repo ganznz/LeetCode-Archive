@@ -21,25 +21,23 @@ class TreeNodeWithNext {
     }
 }
 
-
-// level-order traversal approach
 const connect = root => {
     if (!root) return null;
 
-    const recurse = (root) => {
+    const recurse = root => {
         if (!root.left || !root.right) return;
 
-        // connect nodes that are children of same parent
-        root.left.next = root.right;    
+        // connect left subtree to right subtree of same parent
+        root.left.next = root.right
 
-        // connect the right node of left child to left node of right child
-        if (root.next) root.right.next = root.next.left;
-
+        // connect right subtree to left subtree of parents next
+        if (root.next) root.right.next = root.next.left
+        
         recurse(root.left);
         recurse(root.right);
     }
-    recurse(root);
 
+    recurse(root);
     return root;
 }
 

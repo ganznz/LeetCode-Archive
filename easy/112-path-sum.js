@@ -16,16 +16,15 @@ import { TreeNode } from "../dsa-implementations/data-structures/tree/treeNode.j
 const hasPathSum = (root, targetSum) => {
     if (!root) return false;
 
-    const recurse = (root, currSum = 0) => {
-        const newVal = currSum+root.val;
+    const recurse = (root, currSum=0) => {
+        if (!root) return;
 
-        if (!root.left && !root.right && newVal === targetSum) {
-            return true;
-        }
+        const newVal = currSum + root.val;
+        if (!root.left && !root.right && newVal == targetSum) return true;
 
-        if (root.left && recurse(root.left, newVal)) return true;
-        if (root.right && recurse(root.right, newVal)) return true;
-
+        if(recurse(root.left, newVal)) return true;
+        if(recurse(root.right, newVal)) return true;
+        
         return false;
     }
     return recurse(root);
